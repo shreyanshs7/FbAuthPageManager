@@ -3,6 +3,7 @@ from django.views.decorators.http import require_http_methods
 import requests
 from GrowthPlug.settings import FB_BASE_API
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 
 fields=["category","name","phone","general_info","about","attire","bio","location","parking","hours","emails","website","description","company_overview","personal_info"]
 fieldstring=','.join(fields)
@@ -27,5 +28,4 @@ def getPages(request):
         temp['id'] = data['id']
         temp['category'] = data['category']
         user_pages.append(temp)
-    
     return render(request, 'dashboard.html', { "user_pages" : user_pages })

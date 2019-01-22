@@ -19,7 +19,7 @@
             // for FB.getLoginStatus().
             if (response.status === 'connected') {
                 $("#access_token").val(response.authResponse.accessToken);
-                $("loginForm").submit()
+                $("#loginForm").submit()
             }
         }
 
