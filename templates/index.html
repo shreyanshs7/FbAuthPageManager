@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -89,12 +89,12 @@
   the FB.login() function when clicked.
 -->
 
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    <fb:login-button scope="public_profile,email,manage_pages" onlogin="checkLoginState();" data-size="large" data-button-type="continue_with" data-auto-logout-link="true" data-use-continue-as="true">
     </fb:login-button>
 
     <div id="status">
     </div>
-
+    <br>
 </body>
 
 </html>

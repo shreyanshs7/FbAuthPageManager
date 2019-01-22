@@ -25,7 +25,7 @@ SECRET_KEY = '+=ufxn=r+m=2r+2u4o9hj8p*q6*(qbvu7ta1n+d#u)hbfd+^%='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['growth-plug.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,3 +128,9 @@ STATICFILES_DIRS = (
 )
 
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+#Facebook page id
+PAGE_ID = "1747167272051224"
+
+#Facebook base API host
+FB_BASE_API = "https://graph.facebook.com"
