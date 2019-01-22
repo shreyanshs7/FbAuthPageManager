@@ -25,7 +25,7 @@ SECRET_KEY = '+=ufxn=r+m=2r+2u4o9hj8p*q6*(qbvu7ta1n+d#u)hbfd+^%='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['growth-plug.herokuapp.com']
 
 
 # Application definition
