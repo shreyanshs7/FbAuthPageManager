@@ -20,5 +20,7 @@ from FbAuth import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name = 'index'),
-    path('data', views.getPages, name = "pageDetails")
+    path('data', views.getPages, name = "pageDetails"),
+    path('editpage', views.editPage, name = "editPage"),
+    path('update', views.updatePage, name = "editPage")
 ]

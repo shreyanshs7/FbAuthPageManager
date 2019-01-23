@@ -19,16 +19,50 @@
 		<div class="col s3">
 			<div class="card">
 				<div class="card-content">
-						<span class="card-title">{{ obj.name }}</span>
-						<p>{{ obj.category }}</p>
+					<a href="/editpage?pageId={{ obj.id }}&pageToken={{ obj.access_token }}"><span class="card-title">{{ obj.name }}</span></a>
+					<p>{{ obj.category }}</p>
 				</div>
 			</div>
 		</div>
 		{% endfor %}
 	</div>
-	<!--JavaScript at end of body for optimized loading-->
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script>
+		 function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            if (response.status === 'connected') {
+                console.log(response);
+            }
+        }
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '421576098604229',
+                cookie: true, 
+                xfbml: true, 
+                version: 'v3.2'
+            });
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+	</script>
 </body>
 
 </html>
