@@ -14,19 +14,20 @@
 
 <body>
     <h3 class="center orange-text">Page Details</h3>
+    <h5 class="center">{{ page_details.name }}</h5>
     <div class="container" style="padding-top: 5%;">
         <div class="card">
             <div class="card-content center">
                 <div class="row">
                     <div class="input-field container">
-                        <input id="name" type="text" class="validate" value="{{ page_details.name }}">
-                        <label for="name">Name</label>
+                        <input id="description" type="text" class="validate" value="{{ page_details.description }}">
+                        <label for="description">Description</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field container">
-                        <input id="category" type="text" class="validate" value="{{ page_details.category }}">
-                        <label for="category">Category</label>
+                        <input id="impressum" type="text" class="validate" value="{{ page_details.impressum }}">
+                        <label for="impressum">Impressum</label>
                     </div>
                 </div>
                 <div class="row">
@@ -37,29 +38,29 @@
                 </div>
                 <div class="row">
                     <div class="input-field container">
-                        <input id="city" type="text" class="validate" value="{{ page_details.location.city }}">
-                        <label for="city">City</label>
+                        <input id="phone" type="text" class="validate" value="{{ page_details.phone }}">
+                        <label for="phone">Phone</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field container">
-                        <input id="country" type="text" class="validate" value="{{ page_details.location.country }}">
-                        <label for="country">Country</label>
+                        <input id="website" type="text" class="validate" value="{{ page_details.website }}">
+                        <label for="website">Website</label>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="input-field container">
                         <input id="street" type="text" class="validate" value="{{ page_details.location.street }}">
                         <label for="street">Street</label>
                     </div>
-                </div>
+                </div> -->
                 <button type="submit" class="btn yellow black-text" id="edit">EDIT DETAILS</button>
                 <button type="submit" class="btn yellow black-text" id="save">SAVE DETAILS</button>
             </div>
         </div>
     </div>
-    <input id="access_token" name="pageToken" value="{{ page.access_token }}" hidden>
-    <input id="access_token" name="pageId" value="{{ page_details.id }}" hidden>
+    <input id="pageToken" name="pageToken" value="{{ page_token }}" hidden>
+    <input id="pageId" name="pageId" value="{{ page_details.id }}" hidden>
 
     <!--JavaScript at end of body for optimized loading-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -98,24 +99,24 @@
         }(document, 'script', 'facebook-jssdk'));
 
         $(document).ready(function () {
-            document.getElementById("name").disabled = true;
-            document.getElementById("category").disabled = true;
+            document.getElementById("description").disabled = true;
+            document.getElementById("impressum").disabled = true;
             document.getElementById("about").disabled = true;
-            document.getElementById("city").disabled = true;
-            document.getElementById("country").disabled = true;
-            document.getElementById("street").disabled = true;
+            document.getElementById("phone").disabled = true;
+            document.getElementById("website").disabled = true;
+            // document.getElementById("street").disabled = true;
             $("#save").hide();
         });
         $("#edit").click(function (e) {
 			e.preventDefault();
 			$("#edit").hide();
 			$("#save").show();
-			document.getElementById("name").disabled = false;
-            document.getElementById("category").disabled = false;;
+			document.getElementById("description").disabled = false;
+            document.getElementById("impressum").disabled = false;;
             document.getElementById("about").disabled = false;
-            document.getElementById("city").disabled = false;
-            document.getElementById("country").disabled = false;
-            document.getElementById("street").disabled = false;;
+            document.getElementById("phone").disabled = false;
+            document.getElementById("website").disabled = false;
+            // document.getElementById("street").disabled = false;
 		});
 
         function checkNull(parameter, Name){
@@ -129,32 +130,32 @@
 
         $("#save").click(function(e){
             e.preventDefault();
-            var name = $("#name").val();
-            var category = $("#category").val();
+            var description = $("#description").val();
+            var impressum = $("#impressum").val();
             var about = $("#about").val();
-            var city = $("#city").val();
-            var country = $("#country").val();
-            var street = $("#street").val();
+            var phone = $("#phone").val();
+            var website = $("#website").val();
+            // var street = $("#street").val();
 
-            var nameCheck = checkNull(name, "Name");
-            var categoryCheck = checkNull(category, "Category");
+            var descriptionCheck = checkNull(description, "Description");
+            var impressumCheck = checkNull(impressum, "Impressum");
             var aboutCheck = checkNull(about, "About");
-            var cityCheck = checkNull(city, "City");
-            var countryCheck = checkNull(country, "Country");
-            var streetCheck = checkNull(street, "Street")
-            if(nameCheck && categoryCheck && aboutCheck && cityCheck && countryCheck && streetCheck){
+            var phoneCheck = checkNull(phone, "Phone");
+            var websiteCheck = checkNull(website, "Website");
+            // var streetCheck = checkNull(street, "Street")
+            if(descriptionCheck && impressumCheck && aboutCheck && phoneCheck && websiteCheck){
                 $.ajax({
                     type : "POST",
                     url : '/update',
                     data : {
                         pageId : $("#pageId").val(),
                         pageToken : $("#pageToken").val(),
-                        name : name,
-                        category : category,
+                        description : description,
+                        impressum : impressum,
                         about : about,
-                        city : city,
-                        country : country,
-                        street : street
+                        phone : phone,
+                        website : website,
+                        // street : street
                     },
                     success : function(data) {
                         if(data.success){

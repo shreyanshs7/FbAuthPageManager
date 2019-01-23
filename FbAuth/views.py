@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-import requests
+import requests, json
 from GrowthPlug.settings import FB_BASE_API
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
@@ -27,9 +27,6 @@ def getPages(request):
         temp['name'] = data['name']
         temp['id'] = data['id']
         temp['category'] = data['category']
-        temp['phone'] = data['phone']
-        temp['impressum'] = data['impressum']
-        temp['website'] = data['website']
         user_pages.append(temp)
     return render(request, 'dashboard.html', { "user_pages" : user_pages })
 
@@ -41,7 +38,7 @@ def editPage(request):
     response = requests.get(("%s/%s")%(FB_BASE_API, page_id), params = { "fields" : fieldstring, "access_token" : page_token })
     page_details = response.json()
     print(page_details)
-    return render(request, 'pagedetails.html', { "page_details" : page_details })
+    return render(request, 'pagedetails.html', { "page_details" : page_details, "page_token" : page_token })
 
 @csrf_exempt
 def updatePage(request):
@@ -49,13 +46,12 @@ def updatePage(request):
     page_id = request.POST.get("pageId", "")
     pageData = {}
     pageData['access_token'] = page_token
-    pageData['name'] = request.POST.get('name', "")
-    pageData['category'] = request.POST.get('category', "")
+    pageData['description'] = request.POST.get('description', "")
+    pageData['impressum'] = request.POST.get('impressum', "")
     pageData['about'] = request.POST.get('about', "")
-    pageData['location'] = {}
-    pageData['location']['city'] = request.POST.get('city', "")
-    pageData['location']['country'] = request.POST.get('country', "")
-    pageData['location']['street'] = request.POST.get('street', "")
+    pageData['phone'] = request.POST.get('phone', "")
+    pageData['website'] = request.POST.get("website", "")
+    print(pageData)
     response = requests.post(("%s/%s")%(FB_BASE_API, page_id), data=pageData)
     print(response.json())
-    return JsonResponse({"success" : True}, safe=False)
+    return JsonResponse(response.json())
