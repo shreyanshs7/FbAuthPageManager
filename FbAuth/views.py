@@ -51,6 +51,7 @@ def updatePage(request):
     pageData['about'] = request.POST.get('about', "")
     pageData['phone'] = request.POST.get('phone', "")
     pageData['website'] = request.POST.get("website", "")
+    pageData['company_overview'] = request.POST.get("company_overview", "")
     print(pageData)
     response = requests.post(("%s/%s")%(FB_BASE_API, page_id), data=pageData)
     print(response.json())

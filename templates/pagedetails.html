@@ -48,14 +48,14 @@
                         <label for="website">Website</label>
                     </div>
                 </div>
-                <!-- <div class="row">
+                <div class="row">
                     <div class="input-field container">
-                        <input id="street" type="text" class="validate" value="{{ page_details.location.street }}">
-                        <label for="street">Street</label>
+                        <input id="company_overview" type="text" class="validate" value="{{ page_details.company_overview }}">
+                        <label for="company_overview">Company Overview</label>
                     </div>
-                </div> -->
-                <button type="submit" class="btn yellow black-text" id="edit">EDIT DETAILS</button>
-                <button type="submit" class="btn yellow black-text" id="save">SAVE DETAILS</button>
+                </div>
+                <button type="submit" class="btn orange black-text" id="edit">EDIT DETAILS</button>
+                <button type="submit" class="btn green white-text" id="save">SAVE DETAILS</button>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@
             document.getElementById("about").disabled = true;
             document.getElementById("phone").disabled = true;
             document.getElementById("website").disabled = true;
-            // document.getElementById("street").disabled = true;
+            document.getElementById("company_overview").disabled = true;
             $("#save").hide();
         });
         $("#edit").click(function (e) {
@@ -116,7 +116,7 @@
             document.getElementById("about").disabled = false;
             document.getElementById("phone").disabled = false;
             document.getElementById("website").disabled = false;
-            // document.getElementById("street").disabled = false;
+            document.getElementById("company_overview").disabled = false;
 		});
 
         function checkNull(parameter, Name){
@@ -128,6 +128,14 @@
             }
         }
 
+        function phoneNumberValidate(number){
+            if(number.length == 10){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         $("#save").click(function(e){
             e.preventDefault();
             var description = $("#description").val();
@@ -135,15 +143,16 @@
             var about = $("#about").val();
             var phone = $("#phone").val();
             var website = $("#website").val();
-            // var street = $("#street").val();
+            var company_overview = $("#company_overview").val();
 
             var descriptionCheck = checkNull(description, "Description");
             var impressumCheck = checkNull(impressum, "Impressum");
             var aboutCheck = checkNull(about, "About");
             var phoneCheck = checkNull(phone, "Phone");
             var websiteCheck = checkNull(website, "Website");
-            // var streetCheck = checkNull(street, "Street")
-            if(descriptionCheck && impressumCheck && aboutCheck && phoneCheck && websiteCheck){
+            var company_overviewCheck = checkNull(company_overview, "Company Overview")
+            var phoneValidate = phoneNumberValidate(phone);
+            if(descriptionCheck && impressumCheck && aboutCheck && phoneCheck && websiteCheck && company_overviewCheck && phoneNumberValidate){
                 $.ajax({
                     type : "POST",
                     url : '/update',
@@ -155,7 +164,7 @@
                         about : about,
                         phone : phone,
                         website : website,
-                        // street : street
+                        company_overview : company_overview
                     },
                     success : function(data) {
                         if(data.success){
