@@ -43,10 +43,8 @@ def editPage(request):
     page_id = request.POST.get("pageId", "")
     user_access_token = request.POST.get("token", "")
     page_token = getPageAccessToken(page_id, user_access_token)
-    print(page_token)
     response = requests.get(("%s/%s")%(FB_BASE_API, page_id), params = { "fields" : fieldstring, "access_token" : page_token })
     page_details = response.json()
-    print(page_details)
     return render(request, 'pagedetails.html', { "page_details" : page_details, "page_token" : page_token })
 
 @csrf_exempt

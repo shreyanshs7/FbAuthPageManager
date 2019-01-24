@@ -109,6 +109,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '421576098604229',
@@ -197,7 +200,7 @@
 
         $("#save").click(function (e) {
             e.preventDefault();
-
+            console.log($("#parking").val());   
             FB.getLoginStatus(function (response) {
                 if (response.status === "connected") {
                     var description = $("#description").val();
@@ -244,6 +247,7 @@
                     window.location = '/';
                 }
             });
+        
         });
     </script>
 </body>
