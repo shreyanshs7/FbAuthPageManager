@@ -32,6 +32,7 @@
                 <li class="active"><a href="/home"><span class="white-text">Listings</span></a></li>
                 <li><a href="#"><span class="white-text">Appointments</span></a></li>
                 <li><a href="#"><span class="white-text">Settings</span></a></li>
+                <li><a href="#" onclick="fbLogout()"><span class="white-text">Logout</span></a></li>
             </ul>
         </div>
 
@@ -122,16 +123,12 @@
             $('.sidenav').sidenav();
             $('#sidenav-1').sidenav({ edge: 'left' });
         });
-        // function statusChangeCallback(response) {
-        // if (response.status === 'connected') {
-        //     console.log(response);
-        // }
-        // }
-        // function checkLoginState() {
-        //     FB.getLoginStatus(function (response) {
-        //         statusChangeCallback(response);
-        //     });
-        // }
+        function fbLogout() {
+            FB.logout(function (response) {
+                // user is now logged out
+                console.log(response);
+            });
+        }
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '421576098604229',
@@ -139,9 +136,6 @@
                 xfbml: true,
                 version: 'v3.2'
             });
-            // FB.getLoginStatus(function (response) {
-            //     statusChangeCallback(response);
-            // });
         };
 
         (function (d, s, id) {
