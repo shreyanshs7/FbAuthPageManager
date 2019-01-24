@@ -13,8 +13,7 @@
             console.log('statusChangeCallback');
             console.log(response);
             if (response.status === 'connected') {
-                $("#access_token").val(response.authResponse.accessToken);
-                $("#loginForm").submit()
+                window.location = '/home';
             }
         }
         function checkLoginState() {
