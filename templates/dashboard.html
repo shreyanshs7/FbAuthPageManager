@@ -84,6 +84,8 @@
 					$("#access_token").val(response.authResponse.accessToken);
 					$("#pageId").val(pageId);
 					$("#pageEditForm").submit();
+				} else {
+					window.location = '/';
 				}
 			});
 		}

@@ -108,27 +108,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
-            if (response.status === 'connected') {
-                console.log(response);
-            }
-        }
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '421576098604229',
                 cookie: true,
                 xfbml: true,
                 version: 'v3.2'
-            });
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
             });
         };
 
@@ -204,6 +189,15 @@
 
         $("#save").click(function (e) {
             e.preventDefault();
+
+            FB.getLoginStatus(function (response) {
+                if (response.status === "connected") {
+                    continue;
+                } else {
+                    window.location = '/';
+                }
+            });
+
             var description = $("#description").val();
             var impressum = $("#impressum").val();
             var about = $("#about").val();
