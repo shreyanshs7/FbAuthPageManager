@@ -2,21 +2,147 @@
 <html>
 
 <head>
-	<title>Dashboard</title>
-	<!--Import Google Icon Font-->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!--Import materialize.css-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Dashboard</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script>
-		 function statusChangeCallback(response) {
+    <div class="row">
+
+        <div class="col s3 teal">
+            <ul id="sidenav-1" class="sidenav sidenav-fixed teal lighten-1">
+                <br>
+                <li class="white-text"><a class="subheader center">
+                        <h5>GROWTH PLUG</h5>
+                    </a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <br>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Website</a></li>
+                <li><a href="#">Visitors</a></li>
+                <li><a href="#">Review</a></li>
+                <li class="active"><a href="#">Listings</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="col s9  container">
+            <table class="highlight">
+                <thead>
+                    <tr>
+                        <th>Souce</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Rating</th>
+                        <th>Listed</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Google</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>111.111.1111</td>
+                        <td>3/5</td>
+                        <td>Yes</td>
+                        <td>Active</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Yelp</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>111.111.1111</td>
+                        <td>1/5</td>
+                        <td>No</td>
+                        <td>Not Active</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Yahoo!</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>111.111.1111</td>
+                        <td>3/5</td>
+                        <td>No</td>
+                        <td>Not Active</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Foursquare</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>111.111.1111</td>
+                        <td>2/5</td>
+                        <td>No</td>
+                        <td>Active</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Facebook</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>111.111.1111</td>
+                        <td>3/5</td>
+                        <td>Yes</td>
+                        <td>Active</td>
+                        <td><button class="waves-effect waves-light btn blue">Update</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- <ul id="sidenav-1" class="sidenav sidenav-fixed">
+        <br>
+        <li><a class="subheader center"><h5>GROWTH PLUG</h5></a></li>
+        <li><div class="divider"></div></li>
+        <br>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Website</a></li>
+        <li><a href="#">Visitors</a></li>
+        <li><a href="#">Review</a></li>
+        <li class="active"><a href="#">Listings</a></li>
+        <li><a href="#">Appointments</a></li>
+        <li><a href="#">Settings</a></li>
+    </ul> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, options);
+        });
+
+        // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+        // var collapsibleElem = document.querySelector('.collapsible');
+        // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+
+        // Or with jQuery
+
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('#sidenav-1').sidenav({ edge: 'left' });
+        });
+
+
+
+
+        function statusChangeCallback(response) {
             console.log('statusChangeCallback');
             console.log(response);
             if (response.status === 'connected') {
@@ -31,8 +157,8 @@
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '421576098604229',
-                cookie: true, 
-                xfbml: true, 
+                cookie: true,
+                xfbml: true,
                 version: 'v3.2'
             });
             FB.getLoginStatus(function (response) {
@@ -48,7 +174,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-	</script>
+    </script>
 </body>
 
 </html>

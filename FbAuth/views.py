@@ -13,6 +13,9 @@ fieldstring=','.join(fields)
 def index(request):
     return render(request, 'index.html')
 
+@require_http_methods(['GET'])
+def home(request):
+    return render(request, 'home.html')
 
 @require_http_methods(['POST'])
 @csrf_exempt
