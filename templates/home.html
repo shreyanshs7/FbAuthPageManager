@@ -32,7 +32,7 @@
                 <li class="active"><a href="/home"><span class="white-text">Listings</span></a></li>
                 <li><a href="#"><span class="white-text">Appointments</span></a></li>
                 <li><a href="#"><span class="white-text">Settings</span></a></li>
-                <li><a href="#" onclick="fbLogout()"><span class="white-text">Logout</span></a></li>
+                <!-- <li><a href="#" onclick="fbLogout()"><span class="white-text">Logout</span></a></li> -->
             </ul>
         </div>
 
@@ -123,12 +123,6 @@
             $('.sidenav').sidenav();
             $('#sidenav-1').sidenav({ edge: 'left' });
         });
-        function fbLogout() {
-            FB.logout(function (response) {
-                // user is now logged out
-                console.log(response);
-            });
-        }
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '421576098604229',
@@ -145,6 +139,13 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+        function fbLogout() {
+            FB.logout(function (response) {
+                // user is now logged out
+                console.log(response);
+            });
+        }
 
         function Update() {
             FB.getLoginStatus(function (response) {
