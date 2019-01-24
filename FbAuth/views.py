@@ -33,11 +33,17 @@ def getPages(request):
         user_pages.append(temp)
     return render(request, 'dashboard.html', { "user_pages" : user_pages })
 
+def getPageAccessToken(pageId, userAccessToken):
+    response = requests.get(("%s/%s")%(FB_BASE_API, pageId), params = { "fields" : "access_token", "access_token" : userAccessToken })
+    response = response.json()
+    return response['access_token']
 
 @csrf_exempt
 def editPage(request):
-    page_token = request.GET.get("pageToken", "")
-    page_id = request.GET.get("pageId", "")
+    page_id = request.POST.get("pageId", "")
+    user_access_token = request.POST.get("token", "")
+    page_token = getPageAccessToken(page_id, user_access_token)
+    print(page_token)
     response = requests.get(("%s/%s")%(FB_BASE_API, page_id), params = { "fields" : fieldstring, "access_token" : page_token })
     page_details = response.json()
     print(page_details)
@@ -48,6 +54,7 @@ def updatePage(request):
     page_token = request.POST.get("pageToken", "")
     page_id = request.POST.get("pageId", "")
     pageData = {}
+    emails = []
     pageData['access_token'] = page_token
     pageData['description'] = request.POST.get('description', "")
     pageData['impressum'] = request.POST.get('impressum', "")
@@ -55,6 +62,7 @@ def updatePage(request):
     pageData['phone'] = request.POST.get('phone', "")
     pageData['website'] = request.POST.get("website", "")
     pageData['company_overview'] = request.POST.get("company_overview", "")
+    pageData['emails'] = emails.append(request.POST.get('email', ""))
     print(pageData)
     response = requests.post(("%s/%s")%(FB_BASE_API, page_id), data=pageData)
     print(response.json())

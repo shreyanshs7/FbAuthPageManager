@@ -16,26 +16,28 @@
     <div class="row">
 
         <div class="col s3 teal">
-            <ul id="sidenav-1" class="sidenav sidenav-fixed teal lighten-1">
+            <ul id="sidenav-1" class="sidenav sidenav-fixed teal lighten-1  ">
                 <br>
                 <li class="white-text"><a class="subheader center">
-                        <h5>GROWTH PLUG</h5>
+                        <h5 class="white-text"><b>GROWTH PLUG</b></h5>
                     </a></li>
                 <li>
                     <div class="divider"></div>
                 </li>
                 <br>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Website</a></li>
-                <li><a href="#">Visitors</a></li>
-                <li><a href="#">Review</a></li>
-                <li class="active"><a href="#">Listings</a></li>
-                <li><a href="#">Appointments</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="#"><span class="white-text">Dashboard</span></a></li>
+                <li><a href="#"><span class="white-text">Website</span></a></li>
+                <li><a href="#"><span class="white-text">Visitors</span></a></li>
+                <li><a href="#"><span class="white-text">Review</span></a></li>
+                <li class="active"><a href="/home"><span class="white-text">Listings</span></a></li>
+                <li><a href="#"><span class="white-text">Appointments</span></a></li>
+                <li><a href="#"><span class="white-text">Settings</span></a></li>
             </ul>
         </div>
 
-        <div class="col s9  container">
+        <div class="col s9  container" style="margin-top:8%;">
+            <h4 class="center">LISTINGS</h4>
+            <hr>
             <table class="highlight">
                 <thead>
                     <tr>
@@ -58,8 +60,8 @@
                         <td>111.111.1111</td>
                         <td>3/5</td>
                         <td>Yes</td>
-                        <td>Active</td>
-                        <td></td>
+                        <td><i class="material-icons">check</i></td>
+                        <td><button class="waves-effect waves-light btn blue" disabled>Update</button></td>
                     </tr>
                     <tr>
                         <td>Yelp</td>
@@ -68,8 +70,8 @@
                         <td>111.111.1111</td>
                         <td>1/5</td>
                         <td>No</td>
-                        <td>Not Active</td>
-                        <td></td>
+                        <td><i class="material-icons">clear</i></td>
+                        <td><button class="waves-effect waves-light btn blue" disabled>Update</button></td>
                     </tr>
                     <tr>
                         <td>Yahoo!</td>
@@ -78,8 +80,8 @@
                         <td>111.111.1111</td>
                         <td>3/5</td>
                         <td>No</td>
-                        <td>Not Active</td>
-                        <td></td>
+                        <td><i class="material-icons">clear</i></td>
+                        <td><button class="waves-effect waves-light btn blue" disabled>Update</button></td>
                     </tr>
                     <tr>
                         <td>Foursquare</td>
@@ -88,8 +90,8 @@
                         <td>111.111.1111</td>
                         <td>2/5</td>
                         <td>No</td>
-                        <td>Active</td>
-                        <td></td>
+                        <td><i class="material-icons">check</i></td>
+                        <td><button class="waves-effect waves-light btn blue" disabled>Update</button></td>
                     </tr>
                     <tr>
                         <td>Facebook</td>
@@ -98,28 +100,17 @@
                         <td>111.111.1111</td>
                         <td>3/5</td>
                         <td>Yes</td>
-                        <td>Active</td>
-                        <td><button class="waves-effect waves-light btn blue">Update</button></td>
+                        <td><i class="material-icons">check</i></td>
+                        <td><button class="waves-effect waves-light btn blue" onclick="Update()">Update</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
     </div>
-    <!-- <ul id="sidenav-1" class="sidenav sidenav-fixed">
-        <br>
-        <li><a class="subheader center"><h5>GROWTH PLUG</h5></a></li>
-        <li><div class="divider"></div></li>
-        <br>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Website</a></li>
-        <li><a href="#">Visitors</a></li>
-        <li><a href="#">Review</a></li>
-        <li class="active"><a href="#">Listings</a></li>
-        <li><a href="#">Appointments</a></li>
-        <li><a href="#">Settings</a></li>
-    </ul> -->
-
+    <form id="loginForm" method="POST" action="/data">
+        <input id="access_token" name="token" hidden>
+    </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
@@ -127,33 +118,20 @@
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems, options);
         });
-
-        // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-        // var collapsibleElem = document.querySelector('.collapsible');
-        // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-
-        // Or with jQuery
-
         $(document).ready(function () {
             $('.sidenav').sidenav();
             $('#sidenav-1').sidenav({ edge: 'left' });
         });
-
-
-
-
-        function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
-            if (response.status === 'connected') {
-                console.log(response);
-            }
-        }
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
+        // function statusChangeCallback(response) {
+        //     if (response.status === 'connected') {
+        //         console.log(response);
+        //     }
+        // }
+        // function checkLoginState() {
+        //     FB.getLoginStatus(function (response) {
+        //         statusChangeCallback(response);
+        //     });
+        // }
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '421576098604229',
@@ -161,9 +139,9 @@
                 xfbml: true,
                 version: 'v3.2'
             });
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
+            // FB.getLoginStatus(function (response) {
+            //     statusChangeCallback(response);
+            // });
         };
 
         (function (d, s, id) {
@@ -174,6 +152,12 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
+        function Update() {
+            FB.getLoginStatus(function (response) {
+                $("#access_token").val(response.authResponse.accessToken);
+                $("#loginForm").submit()
+            });
+        }
     </script>
 </body>
 

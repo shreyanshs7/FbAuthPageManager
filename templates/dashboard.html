@@ -13,54 +13,80 @@
 </head>
 
 <body>
-	DASHBOARD
 	<div class="row">
-		{% for obj in user_pages %}
-		<div class="col s3">
-			<div class="card">
-				<div class="card-content">
-					<a href="/editpage?pageId={{ obj.id }}&pageToken={{ obj.access_token }}"><span class="card-title">{{ obj.name }}</span></a>
-					<p>{{ obj.category }}</p>
+
+		<div class="col s3 teal">
+			<ul id="sidenav-1" class="sidenav sidenav-fixed teal lighten-1  ">
+				<br>
+				<li class="white-text"><a class="subheader center">
+						<h5 class="white-text"><b>GROWTH PLUG</b></h5>
+					</a></li>
+				<li>
+					<div class="divider"></div>
+				</li>
+				<br>
+				<li><a href="#"><span class="white-text">Dashboard</span></a></li>
+				<li><a href="#"><span class="white-text">Website</span></a></li>
+				<li><a href="#"><span class="white-text">Visitors</span></a></li>
+				<li><a href="#"><span class="white-text">Review</span></a></li>
+				<li class="active"><a href="/home"><span class="white-text">Listings</span></a></li>
+				<li><a href="#"><span class="white-text">Appointments</span></a></li>
+				<li><a href="#"><span class="white-text">Settings</span></a></li>
+			</ul>
+		</div>
+
+		<div class="col s9 container" style="margin-top:8%;">
+			<h4 class="center">Pages owned on Facebook</h4>
+			<hr>
+			<br>
+			<div class="row center">
+				{% for obj in user_pages %}
+				<div class="col s3">
+					<div class="card z-depth-3">
+						<div class="card-content">
+							<a onclick="editPage({{ obj.id }})" class="orange-text"><span class="card-title">{{ obj.name }}</span></a>
+							<p>{{ obj.category }}</p>
+						</div>
+					</div>
 				</div>
+				{% endfor %}
 			</div>
 		</div>
-		{% endfor %}
-	</div>
 
+	</div>
+	<form id="pageEditForm" method="POST" action="/editpage">
+		<input id="access_token" name="token" hidden>
+		<input id="pageId" name="pageId" hidden>
+	</form>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script>
-		 function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
-            if (response.status === 'connected') {
-                console.log(response);
-            }
-        }
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '421576098604229',
-                cookie: true, 
-                xfbml: true, 
-                version: 'v3.2'
-            });
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        };
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: '421576098604229',
+				cookie: true,
+				xfbml: true,
+				version: 'v3.2'
+			});
+		};
 
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		function editPage(pageId) {
+			FB.getLoginStatus(function (response) {
+				if (response.status === "connected") {
+					$("#access_token").val(response.authResponse.accessToken);
+					$("#pageId").val(pageId);
+					$("#pageEditForm").submit();
+				}
+			});
+		}
 
 	</script>
 </body>
