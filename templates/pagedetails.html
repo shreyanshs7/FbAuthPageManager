@@ -221,7 +221,12 @@
                     var company_overviewCheck = checkNull(company_overview, "Company Overview")
                     var phoneValidate = phoneNumberValidate(phone);
                     var websiteUrlValidate = isUrlValid(website);
-                    var emailValidate = validateEmail(email);
+                    if( typeof email != "undefined") {
+                        var emailValidate = validateEmail(email);
+                    } else {
+                        var emailValidate = true;
+                    }
+                       
                     if (descriptionCheck && emailValidate && impressumCheck && emailCheck && aboutCheck && phoneCheck && websiteCheck && company_overviewCheck && phoneNumberValidate && websiteUrlValidate) {
                         $.ajax({
                             type: "POST",
