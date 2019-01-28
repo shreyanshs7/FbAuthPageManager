@@ -53,6 +53,7 @@ def updatePage(request):
     page_id = request.POST.get("pageId", "")
     pageData = {}
     emails = []
+    emails.append(request.POST.get("email", ""))
     pageData['access_token'] = page_token
     pageData['description'] = request.POST.get('description', "")
     pageData['impressum'] = request.POST.get('impressum', "")
@@ -60,8 +61,8 @@ def updatePage(request):
     pageData['phone'] = request.POST.get('phone', "")
     pageData['website'] = request.POST.get("website", "")
     pageData['company_overview'] = request.POST.get("company_overview", "")
-    pageData['emails'] = emails.append(request.POST.get('email', ""))
+    pageData['emails'] = emails
     print(pageData)
-    response = requests.post(("%s/%s")%(FB_BASE_API, page_id), data=pageData)
+    response = requests.post(("%s/%s")%(FB_BASE_API, page_id), json=pageData)
     print(response.json())
     return JsonResponse(response.json())
